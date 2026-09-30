@@ -1,0 +1,8 @@
+# Store text with LF line endings in the repository and check it out that way on every platform.
+* text=auto eol=lf
+
+# Windows script files need CRLF.
+*.bat text eol=crlf
+
+*.png binary
+*.jar binary

@@ -1,0 +1,63 @@
+# Builds the mod and runs every test on each push and pull request:
+#   build             – compile, unit tests and server game tests (./gradlew build)
+#   client-game-test  – a real client under a virtual display: enters the castle, jumps through a gravity gate,
+#                       and uploads screenshots as an artifact
+name: build
+on: [pull_request, push]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: validate gradle wrapper
+        uses: gradle/actions/wrapper-validation@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew build
+      - name: store test reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reports
+          path: |
+            build/reports/
+            build/test-results/
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: Artifacts
+          path: build/libs/
+
+  client-game-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v6
+      - name: setup jdk
+        uses: actions/setup-java@v5
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+      - name: install virtual display
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+      - name: make gradle wrapper executable
+        run: chmod +x ./gradlew
+      - name: run client game test
+        run: xvfb-run -a -s "-screen 0 1280x720x24" ./gradlew runClientGameTest
+      - name: upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: client-game-test-screenshots
+          path: build/run/clientGameTest/screenshots

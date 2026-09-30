@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": "minecraft:wheat",
+    "G": "minecraft:green_dye"
+  },
+  "pattern": [
+    "WWW",
+    "WGW",
+    "WWW"
+  ],
+  "result": {
+    "count": 4,
+    "id": "infinitycastle:tatami"
+  }
+}

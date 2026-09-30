@@ -1,0 +1,6 @@
+{
+  "parent": "infinitycastle:block/template_paper_lantern",
+  "textures": {
+    "lantern": "infinitycastle:block/paper_lantern"
+  }
+}

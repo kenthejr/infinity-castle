@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "infinitycastle",
+	"version": "${version}",
+	"name": "Infinity Castle",
+	"description": "An endless, procedurally generated castle of shoji corridors and upside-down rooms, inspired by the Infinity Castle (Mugen-jō) from Demon Slayer. Gravity and the camera flip as you move between floors.",
+	"authors": [
+		"Ken A."
+	],
+	"contact": {
+		"homepage": "https://github.com/kenthejr/infinity-castle",
+		"sources": "https://github.com/kenthejr/infinity-castle",
+		"issues": "https://github.com/kenthejr/infinity-castle/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/infinitycastle/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.kenthejr.infinitycastle.InfinityCastle"
+		],
+		"client": [
+			"io.github.kenthejr.infinitycastle.client.InfinityCastleClient"
+		]
+	},
+	"mixins": [
+		"infinitycastle.mixins.json",
+		{
+			"config": "infinitycastle.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

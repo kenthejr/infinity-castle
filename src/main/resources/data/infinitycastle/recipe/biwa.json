@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "minecraft:dark_oak_planks",
+    "S": "minecraft:string",
+    "E": "minecraft:ender_pearl"
+  },
+  "pattern": [
+    "  S",
+    " ES",
+    "PP "
+  ],
+  "result": {
+    "id": "infinitycastle:biwa"
+  }
+}

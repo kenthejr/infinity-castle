@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "io.github.kenthejr.infinitycastle.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"CameraMixin",
+		"GameRendererMixin",
+		"KeyboardInputMixin",
+		"LivingEntityRendererMixin",
+		"MouseHandlerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

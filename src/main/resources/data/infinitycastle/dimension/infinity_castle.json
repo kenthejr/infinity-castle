@@ -1,0 +1,10 @@
+{
+  "type": "infinitycastle:infinity_castle",
+  "generator": {
+    "type": "infinitycastle:castle",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "infinitycastle:infinity_castle"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "block.infinitycastle.tatami": "Tatami",
+  "block.infinitycastle.shoji": "Shoji Wall",
+  "block.infinitycastle.shoji_screen": "Shoji Screen",
+  "block.infinitycastle.lacquered_planks": "Lacquered Planks",
+  "block.infinitycastle.paper_lantern": "Paper Lantern",
+  "item.infinitycastle.biwa": "Biwa",
+  "itemGroup.infinitycastle.infinity_castle": "Infinity Castle",
+
+  "message.infinitycastle.floor": "%s  ·  Floor %s",
+  "message.infinitycastle.floor.drifting": "  ·  the air here is light",
+  "message.infinitycastle.missing_dimension": "The Infinity Castle dimension is missing. Is the mod's data pack enabled?",
+
+  "commands.infinitycastle.enter": "Drew %s player(s) into the Infinity Castle",
+  "commands.infinitycastle.leave": "Released %s player(s) from the Infinity Castle",
+  "commands.infinitycastle.where": "%s (floor %s), %s, in a %s. Gravity %s",
+  "commands.infinitycastle.where.outside": "You are not inside the Infinity Castle",
+  "commands.infinitycastle.stairwell.none": "No stairwell found nearby on this floor",
+
+  "half.infinitycastle.lower": "lower half",
+  "half.infinitycastle.upper": "upper half (inverted)",
+
+  "module.infinitycastle.void": "void",
+  "module.infinitycastle.sideways_chamber": "sideways chamber",
+  "module.infinitycastle.pavilion": "pavilion",
+  "module.infinitycastle.room": "screen room",
+  "module.infinitycastle.corridor": "corridor",
+  "module.infinitycastle.bridge": "bridge",
+  "module.infinitycastle.hall": "hall",
+  "module.infinitycastle.stairwell": "stairwell",
+  "module.infinitycastle.entrance": "entrance hall"
+}

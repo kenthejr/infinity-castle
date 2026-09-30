@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "#minecraft:planks",
+    "R": "minecraft:red_dye"
+  },
+  "pattern": [
+    "###",
+    "#R#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "infinitycastle:lacquered_planks"
+  }
+}

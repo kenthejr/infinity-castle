@@ -1,0 +1,35 @@
+name: Bug report
+description: Something in the castle isn't working
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead? Screenshots help a lot.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Enter the castle with the biwa
+        2. Walk to a stairwell on floor 9
+        3. Jump through the gravity gate
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Minecraft, Fabric Loader, Fabric API and Infinity Castle versions.
+      placeholder: "Minecraft 26.3, Loader 0.19.5, Fabric API 0.161.0+26.3, Infinity Castle 0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste latest.log or a crash report, or link to a paste site.
+      render: text

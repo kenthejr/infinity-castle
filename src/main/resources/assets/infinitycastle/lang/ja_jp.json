@@ -1,0 +1,32 @@
+{
+  "block.infinitycastle.tatami": "畳",
+  "block.infinitycastle.shoji": "障子の壁",
+  "block.infinitycastle.shoji_screen": "障子",
+  "block.infinitycastle.lacquered_planks": "朱塗りの板",
+  "block.infinitycastle.paper_lantern": "提灯",
+  "item.infinitycastle.biwa": "琵琶",
+  "itemGroup.infinitycastle.infinity_castle": "無限城",
+
+  "message.infinitycastle.floor": "%s  ·  %s階",
+  "message.infinitycastle.floor.drifting": "  ·  身体が軽い",
+  "message.infinitycastle.missing_dimension": "無限城のディメンションが見つかりません。Modのデータパックは有効ですか？",
+
+  "commands.infinitycastle.enter": "%s人を無限城へ引き込みました",
+  "commands.infinitycastle.leave": "%s人を無限城から解放しました",
+  "commands.infinitycastle.where": "%s（%s階）、%s、%s。重力 %s",
+  "commands.infinitycastle.where.outside": "無限城の中にいません",
+  "commands.infinitycastle.stairwell.none": "この階の近くに階段が見つかりません",
+
+  "half.infinitycastle.lower": "下層",
+  "half.infinitycastle.upper": "上層（逆さま）",
+
+  "module.infinitycastle.void": "虚空",
+  "module.infinitycastle.sideways_chamber": "横倒しの間",
+  "module.infinitycastle.pavilion": "東屋",
+  "module.infinitycastle.room": "襖の間",
+  "module.infinitycastle.corridor": "廊下",
+  "module.infinitycastle.bridge": "橋",
+  "module.infinitycastle.hall": "広間",
+  "module.infinitycastle.stairwell": "階段",
+  "module.infinitycastle.entrance": "玄関の間"
+}

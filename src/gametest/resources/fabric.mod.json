@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"id": "infinitycastle-gametest",
+	"version": "1.0.0",
+	"name": "Infinity Castle Game Tests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-gametest": [
+			"io.github.kenthejr.infinitycastle.test.CastleGameTest"
+		],
+		"fabric-client-gametest": [
+			"io.github.kenthejr.infinitycastle.test.CastleClientGameTest"
+		]
+	},
+	"mixins": [
+		"infinitycastle-gametest.mixins.json"
+	],
+	"depends": {
+		"infinitycastle": "*"
+	}
+}

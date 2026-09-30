@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "#lantern"
+  },
+  "elements": [
+    {
+      "from": [5, 2, 5],
+      "to": [11, 3, 11],
+      "faces": {
+        "down":  {"uv": [8, 0, 14, 6], "texture": "#lantern"},
+        "up":    {"uv": [8, 0, 14, 6], "texture": "#lantern"},
+        "north": {"uv": [8, 0, 14, 1], "texture": "#lantern"},
+        "south": {"uv": [8, 0, 14, 1], "texture": "#lantern"},
+        "west":  {"uv": [8, 0, 14, 1], "texture": "#lantern"},
+        "east":  {"uv": [8, 0, 14, 1], "texture": "#lantern"}
+      }
+    },
+    {
+      "from": [4, 3, 4],
+      "to": [12, 15, 12],
+      "faces": {
+        "down":  {"uv": [8, 8, 16, 16], "texture": "#lantern"},
+        "up":    {"uv": [8, 8, 16, 16], "texture": "#lantern"},
+        "north": {"uv": [0, 0, 8, 12], "texture": "#lantern"},
+        "south": {"uv": [0, 0, 8, 12], "texture": "#lantern"},
+        "west":  {"uv": [0, 0, 8, 12], "texture": "#lantern"},
+        "east":  {"uv": [0, 0, 8, 12], "texture": "#lantern"}
+      }
+    },
+    {
+      "from": [5, 15, 5],
+      "to": [11, 16, 11],
+      "faces": {
+        "down":  {"uv": [8, 0, 14, 6], "texture": "#lantern"},
+        "up":    {"uv": [8, 0, 14, 6], "texture": "#lantern", "cullface": "up"},
+        "north": {"uv": [8, 0, 14, 1], "texture": "#lantern"},
+        "south": {"uv": [8, 0, 14, 1], "texture": "#lantern"},
+        "west":  {"uv": [8, 0, 14, 1], "texture": "#lantern"},
+        "east":  {"uv": [8, 0, 14, 1], "texture": "#lantern"}
+      }
+    }
+  ]
+}

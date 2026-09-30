@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_post",
+  "textures": {
+    "edge": "infinitycastle:block/shoji_screen_top",
+    "pane": "infinitycastle:block/shoji_screen"
+  }
+}
