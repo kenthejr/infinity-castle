@@ -25,6 +25,7 @@ public final class ModItems {
 	public static final Item SHOJI_SCREEN = registerBlock(ModBlocks.SHOJI_SCREEN);
 	public static final Item LACQUERED_PLANKS = registerBlock(ModBlocks.LACQUERED_PLANKS);
 	public static final Item PAPER_LANTERN = registerBlock(ModBlocks.PAPER_LANTERN);
+	public static final Item FUSUMA = registerBlock(ModBlocks.FUSUMA);
 
 	public static final CreativeModeTab TAB = Registry.register(
 		BuiltInRegistries.CREATIVE_MODE_TAB,
@@ -33,7 +34,7 @@ public final class ModItems {
 			.title(Component.translatable("itemGroup.infinitycastle.infinity_castle"))
 			.icon(() -> new ItemStack(ModItems.PAPER_LANTERN))
 			.displayItems((parameters, output) -> {
-				for (Item item : List.of(BIWA, TATAMI, SHOJI, SHOJI_SCREEN, LACQUERED_PLANKS, PAPER_LANTERN)) {
+				for (Item item : List.of(BIWA, FUSUMA, TATAMI, SHOJI, SHOJI_SCREEN, LACQUERED_PLANKS, PAPER_LANTERN)) {
 					output.accept(item);
 				}
 			})

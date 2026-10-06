@@ -2,15 +2,15 @@ package io.github.kenthejr.infinitycastle.gen;
 
 /** Places a cell's canvas into the world, flipping upper-half cells upside down and tipping sideways chambers over. */
 public final class CellPlacer {
-	/** How far above the deck a sideways chamber floats. */
+	/** How far above the bottom of the half a sideways chamber floats. */
 	public static final int SIDEWAYS_LIFT = 4;
 
 	@FunctionalInterface
 	public interface BlockSink {
 		/**
-		 * @param localX x within the cell (and chunk), 0..15
+		 * @param localX x within the cell or chunk being placed
 		 * @param worldY absolute y
-		 * @param localZ z within the cell (and chunk), 0..15
+		 * @param localZ z within the cell or chunk being placed
 		 */
 		void set(int localX, int worldY, int localZ, Piece piece);
 	}
@@ -18,6 +18,7 @@ public final class CellPlacer {
 	private CellPlacer() {
 	}
 
+	/** Places one cell's canvas, in cell-local x and z. */
 	public static void place(CellPlan plan, Canvas canvas, int floor, Half half, BlockSink sink) {
 		boolean sideways = plan.type() == ModuleType.SIDEWAYS_CHAMBER;
 		canvas.forEach((x, y, z, piece) -> {
@@ -33,6 +34,9 @@ public final class CellPlacer {
 					return;
 				}
 				p = p.tipOverX();
+				if (p.isAir()) {
+					return;
+				}
 			}
 			if (half.inverted()) {
 				p = p.flipVertical();
@@ -41,16 +45,29 @@ public final class CellPlacer {
 		});
 	}
 
-	/** Builds and places every cell of one chunk column. */
-	public static void placeColumn(CastleLayout layout, int cx, int cz, BlockSink sink) {
+	/** Builds and places every half of every floor in one cell, in cell-local x and z. */
+	public static void placeCell(CastleLayout layout, int cellX, int cellZ, BlockSink sink) {
 		for (int floor = 0; floor < CastleGeometry.FLOOR_COUNT; floor++) {
 			for (Half half : Half.values()) {
-				CellPlan plan = layout.plan(floor, half, cx, cz);
+				CellPlan plan = layout.plan(floor, half, cellX, cellZ);
 				if (plan.type() == ModuleType.VOID) {
 					continue;
 				}
 				place(plan, Modules.build(plan), floor, half, sink);
 			}
 		}
+	}
+
+	/** Builds the cell a chunk belongs to and places only that chunk's part of it, in chunk-local x and z. */
+	public static void placeChunk(CastleLayout layout, int chunkX, int chunkZ, BlockSink sink) {
+		int offsetX = Math.floorMod(chunkX, CastleGeometry.CHUNKS_PER_CELL) * 16;
+		int offsetZ = Math.floorMod(chunkZ, CastleGeometry.CHUNKS_PER_CELL) * 16;
+		placeCell(layout, Math.floorDiv(chunkX, CastleGeometry.CHUNKS_PER_CELL), Math.floorDiv(chunkZ, CastleGeometry.CHUNKS_PER_CELL), (x, y, z, piece) -> {
+			int cx = x - offsetX;
+			int cz = z - offsetZ;
+			if (cx >= 0 && cx < 16 && cz >= 0 && cz < 16) {
+				sink.set(cx, y, cz, piece);
+			}
+		});
 	}
 }

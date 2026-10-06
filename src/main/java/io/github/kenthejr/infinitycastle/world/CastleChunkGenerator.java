@@ -33,8 +33,9 @@ import net.minecraft.world.level.levelgen.densityfunction.SamplerContext;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Generates the castle. Everything is decided by {@link CastleLayout} from the world seed, one cell per chunk column,
- * so there are no structures, features or noise involved.
+ * Generates the castle. Everything is decided by {@link CastleLayout} from the world seed, one cell per two-by-two
+ * block of chunks, so there are no structures, features or noise involved. Each chunk builds the whole cell it belongs
+ * to and keeps its own quarter.
  */
 public class CastleChunkGenerator extends ChunkGenerator {
 	public static final MapCodec<CastleChunkGenerator> CODEC = RecordCodecBuilder.mapCodec(
@@ -72,7 +73,7 @@ public class CastleChunkGenerator extends ChunkGenerator {
 		int originX = SectionPos.sectionToBlockCoord(pos.x());
 		int originZ = SectionPos.sectionToBlockCoord(pos.z());
 
-		CellPlacer.placeColumn(layout(randomState), pos.x(), pos.z(), (x, y, z, piece) -> {
+		CellPlacer.placeChunk(layout(randomState), pos.x(), pos.z(), (x, y, z, piece) -> {
 			if (chunk.isOutsideBuildHeight(y)) {
 				return;
 			}
@@ -126,7 +127,7 @@ public class CastleChunkGenerator extends ChunkGenerator {
 	public void addDebugScreenInfo(List<String> result, RandomState randomState, BlockPos feetPos, SamplerContext samplerContext) {
 		int floor = CastleGeometry.floorOf(feetPos.getY());
 		Half half = CastleGeometry.halfOf(feetPos.getY());
-		CellPlan plan = layout(randomState).plan(floor, half, SectionPos.blockToSectionCoord(feetPos.getX()), SectionPos.blockToSectionCoord(feetPos.getZ()));
+		CellPlan plan = layout(randomState).plan(floor, half, CastleGeometry.cellOf(feetPos.getX()), CastleGeometry.cellOf(feetPos.getZ()));
 		FloorProfile profile = FloorProfile.of(floor);
 		result.add("Castle: floor " + profile.number() + " " + half + " " + plan.type() + " " + plan.openings());
 		result.add("Castle: gravity x" + profile.gravityScale() + ", tilt " + profile.cameraTilt() + ", band " + GravityRules.equatorBand(feetPos.getY()));

@@ -4,7 +4,7 @@ import io.github.kenthejr.infinitycastle.gen.CastleGeometry;
 import io.github.kenthejr.infinitycastle.gen.CastleLayout;
 import io.github.kenthejr.infinitycastle.gen.CellPlacer;
 import io.github.kenthejr.infinitycastle.gen.Half;
-import io.github.kenthejr.infinitycastle.gen.Material;
+
 import io.github.kenthejr.infinitycastle.gen.ModuleType;
 import io.github.kenthejr.infinitycastle.gravity.GravityController;
 import io.github.kenthejr.infinitycastle.registry.ModBlocks;
@@ -20,6 +20,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -38,15 +39,17 @@ public class CastleGameTest {
 	public void generatedChunksMatchTheLayout(GameTestHelper helper) {
 		ServerLevel castle = castle(helper);
 		CastleLayout layout = CastleChunkGenerator.layout(castle.getChunkSource().randomState());
-		for (int cx = -1; cx <= 1; cx++) {
-			for (int cz = -1; cz <= 1; cz++) {
-				castle.getChunk(cx, cz);
-				int ox = cx * 16;
-				int oz = cz * 16;
+		// The entrance cell's four chunks and one chunk of each neighbouring cell.
+		for (int chunkX = -1; chunkX <= 2; chunkX++) {
+			for (int chunkZ = -1; chunkZ <= 2; chunkZ++) {
+				castle.getChunk(chunkX, chunkZ);
+				int ox = chunkX * 16;
+				int oz = chunkZ * 16;
 				int[] checked = {0};
-				CellPlacer.placeColumn(layout, cx, cz, (x, y, z, piece) -> {
+				CellPlacer.placeChunk(layout, chunkX, chunkZ, (x, y, z, piece) -> {
 					BlockState actual = castle.getBlockState(new BlockPos(ox + x, y, oz + z));
-					boolean match = piece.material().shape() == Material.Shape.CONNECTING
+					// Fences and stairs have their connections and corner shapes resolved after generation.
+					boolean match = CastlePalette.needsPostProcessing(piece)
 						? actual.is(CastlePalette.block(piece.material()))
 						: actual.equals(CastlePalette.state(piece));
 					if (!match) {
@@ -54,7 +57,7 @@ public class CastleGameTest {
 					}
 					checked[0]++;
 				});
-				helper.assertTrue(checked[0] > 0 || layout.plan(CastleGeometry.ENTRANCE_FLOOR, Half.LOWER, cx, cz).type() == ModuleType.VOID, "chunk " + cx + "," + cz + " is empty");
+				helper.assertTrue(checked[0] > 0, "chunk " + chunkX + "," + chunkZ + " is empty");
 			}
 		}
 		helper.succeed();
@@ -64,7 +67,7 @@ public class CastleGameTest {
 	public void entranceHallIsSafeToArriveIn(GameTestHelper helper) {
 		ServerLevel castle = castle(helper);
 		BlockPos arrival = BlockPos.containing(CastleTeleporter.ENTRANCE);
-		helper.assertTrue(castle.getBlockState(arrival.below()).is(ModBlocks.TATAMI), "no tatami under the arrival point");
+		helper.assertTrue(castle.getBlockState(arrival.below()).is(Blocks.OAK_SLAB), "no room floor under the arrival point");
 		helper.assertTrue(castle.getBlockState(arrival).isAir(), "arrival point is blocked");
 		helper.assertTrue(castle.getBlockState(arrival.above()).isAir(), "no headroom at the arrival point");
 		helper.succeed();
@@ -133,7 +136,7 @@ public class CastleGameTest {
 		while (layout.plan(floor, Half.UPPER, cx, 0).type() != ModuleType.VOID) {
 			cx++;
 		}
-		int x = cx * 16 + 8;
+		int x = cx * CastleGeometry.CELL_SIZE + CastleGeometry.CELL_SIZE / 2;
 		BlockPos ceiling = new BlockPos(x, (int) CastleGeometry.equatorY(floor) + 10, 8);
 		for (int dx = -2; dx <= 2; dx++) {
 			for (int dz = -2; dz <= 2; dz++) {
@@ -155,6 +158,6 @@ public class CastleGameTest {
 	}
 
 	private static void place(ServerPlayer player, ServerLevel castle, double centerY) {
-		player.teleportTo(castle, 8.5, centerY - player.getBbHeight() / 2.0, 8.5, java.util.Set.of(), 0.0F, 0.0F, false);
+		player.teleportTo(castle, CastleTeleporter.ENTRANCE.x, centerY - player.getBbHeight() / 2.0, CastleTeleporter.ENTRANCE.z, java.util.Set.of(), 0.0F, 0.0F, false);
 	}
 }

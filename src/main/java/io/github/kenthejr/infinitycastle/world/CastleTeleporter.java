@@ -25,8 +25,8 @@ public final class CastleTeleporter {
 		builder -> builder.persistent(GlobalPos.CODEC).copyOnDeath()
 	);
 
-	/** Arrival point: the centre of the entrance hall. */
-	public static final Vec3 ENTRANCE = new Vec3(8.5, CastleGeometry.entranceStandY(), 8.5);
+	/** Arrival point: on the floor of the entrance hall, beside its spiral stair. */
+	public static final Vec3 ENTRANCE = new Vec3(Modules.ARRIVAL_X + 0.5, CastleGeometry.entranceStandY(), Modules.ARRIVAL_Z + 0.5);
 
 	private CastleTeleporter() {
 	}
@@ -70,9 +70,9 @@ public final class CastleTeleporter {
 	/** Where a player stands on the lower landing of a stairwell, facing the gravity gate. */
 	public static Vec3 lowerLanding(int floor, CastleLayout.Cell cell) {
 		return new Vec3(
-			cell.x() * 16 + Modules.LANDING_CENTER_X + 0.5,
+			cell.x() * CastleGeometry.CELL_SIZE + Modules.LANDING_CENTER_X + 0.5,
 			CastleGeometry.worldY(floor, Half.LOWER, Modules.LANDING_Y) + 1,
-			cell.z() * 16 + Modules.LANDING_CENTER_Z + 0.5
+			cell.z() * CastleGeometry.CELL_SIZE + Modules.LANDING_CENTER_Z + 0.5
 		);
 	}
 

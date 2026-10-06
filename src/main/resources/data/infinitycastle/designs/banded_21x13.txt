@@ -1,0 +1,188 @@
+# Infinity Castle design "banded_21x13": dark-oak lattice band below the fusuma, tall, long.
+# Imported by tools/DesignImport.java from the structure-block regions at (-43, -60, 39) (doors closed)
+# and (-43, -30, 39) (doors open) of the "Infinity castle : Designs" world. Edit the world and re-import rather than editing this file.
+# Layers are listed bottom up. Within a layer each row runs west to east and the rows run north to south.
+size 21 9 13
+palette
+. air
+a spruce_planks
+b oak_slab[type=bottom]
+c oak_fence
+d fusuma[facing=north]
+e fusuma[facing=south]
+f fusuma[facing=east]
+g fusuma[facing=west]
+h dark_oak_stairs[facing=north,half=bottom]
+i dark_oak_stairs[facing=north,half=top]
+j dark_oak_stairs[facing=south,half=bottom]
+k dark_oak_stairs[facing=south,half=top]
+l dark_oak_trapdoor[facing=north,half=bottom]
+m dark_oak_trapdoor[facing=south,half=bottom]
+n oak_planks
+o dark_oak_stairs[facing=east,half=bottom]
+p dark_oak_stairs[facing=east,half=top]
+q dark_oak_stairs[facing=west,half=bottom]
+r dark_oak_stairs[facing=west,half=top]
+s dark_oak_trapdoor[facing=east,half=bottom]
+t dark_oak_trapdoor[facing=west,half=bottom]
+u stripped_birch_log[axis=y]
+v spruce_slab[type=top]
+w lantern[hanging=true]
+x spruce_stairs[facing=south,half=bottom]
+y spruce_stairs[facing=east,half=bottom]
+z spruce_stairs[facing=north,half=bottom]
+A spruce_stairs[facing=west,half=bottom]
+layer 0
+aaaaaaaaaaaaaaaaaaaaa
+abbbnbbbnbbbnbbbnbbba
+abbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbba
+anbbbbbbbbbbbbbbbbbna
+abbbbbbbbxbbbbbbbbbba
+abbbbbbbbbubbbbbbbbba
+abbbbbbbbbbbbbbbbbbba
+anbbbbbbbbbbbbbbbbbna
+abbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbba
+abbbnbbbnbbbnbbbnbbba
+aaaaaaaaaaaaaaaaaaaaa
+layer 1
+ajjjajjjajjjajjjajjja
+o...c...c...c...c...q
+o...................q
+o...................q
+ac.................ca
+o...................q
+o........xu.........q
+o........v..........q
+ac.................ca
+o...................q
+o...................q
+o...c...c...c...c...q
+ahhhahhhahhhahhhahhha
+layer 2
+alllalllalllalllallla
+t...................s
+t...................s
+t...................s
+a...................a
+t...................s
+t.........u.........s
+t.........yv........s
+a...................a
+t...................s
+t...................s
+t...................s
+ammmammmammmammmammma
+layer 3
+akkkakkkakkkakkkakkka
+p...c...c...c...c...r
+p...................r
+p...................r
+ac.................ca
+p..........v........r
+p.........uz........r
+p...................r
+ac.................ca
+p...................r
+p...................r
+p...c...c...c...c...r
+aiiiaiiiaiiiaiiiaiiia
+layer 4
+aaaaaaaaaaaaaaaaaaaaa
+a...c...c...c...c...a
+a...................a
+a...................a
+ac.................ca
+a........vA.........a
+a.........u.........a
+a...................a
+ac.................ca
+a...................a
+a...................a
+a...c...c...c...c...a
+aaaaaaaaaaaaaaaaaaaaa
+layer 5
+adddadddadddadddaddda
+g...c...c...c...c...f
+g...................f
+g...................f
+ac.................ca
+g...................f
+g........xu.........f
+g........v..........f
+ac.................ca
+f...................f
+f...................f
+f...c...c...c...c...f
+aeeeaeeeaeeeaeeeaeeea
+layer 6
+adddadddadddadddaddda
+g...c...c...c...c...f
+g...................f
+g...................f
+ac.................ca
+g...................f
+g.........u.........f
+g.........yv........f
+ac.................ca
+g...................f
+g...................f
+g...c...c...c...c...f
+aeeeaeeeaeeeaeeeaeeea
+layer 7
+adddadddadddadddaddda
+g...c...c...c...c...f
+g...................f
+g...................f
+ac......w...w......ca
+g..........v........f
+g.........uz........f
+g...................f
+ac......w...w......ca
+g...................f
+g...................f
+g...c...c...c...c...f
+aeeeaeeeaeeeaeeeaeeea
+layer 8
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaavA.aaaaaaaaa
+aaaaaaaaa.u.aaaaaaaaa
+aaaaaaaaa...aaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaa
+door north
+9 1 0 .
+10 1 0 .
+11 1 0 .
+9 2 0 .
+10 2 0 .
+11 2 0 .
+door east
+20 1 5 .
+20 1 6 .
+20 1 7 .
+20 2 5 .
+20 2 6 .
+20 2 7 .
+door south
+9 1 12 .
+10 1 12 .
+11 1 12 .
+9 2 12 .
+10 2 12 .
+11 2 12 .
+door west
+0 1 5 .
+0 1 6 .
+0 1 7 .
+0 2 5 .
+0 2 6 .
+0 2 7 .

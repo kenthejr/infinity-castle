@@ -42,3 +42,6 @@ replay_*.log
 # game runs started from the project root
 logs/
 crash-reports/
+
+# design source worlds (imported with tools/DesignImport.java)
+/*.zip

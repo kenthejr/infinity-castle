@@ -1,0 +1,120 @@
+# Infinity Castle design "plain_13": fusuma walls, single storey.
+# Imported by tools/DesignImport.java from the structure-block regions at (-78, -60, -16) (doors closed)
+# and (-78, -30, -16) (doors open) of the "Infinity castle : Designs" world. Edit the world and re-import rather than editing this file.
+# Layers are listed bottom up. Within a layer each row runs west to east and the rows run north to south.
+size 13 5 13
+palette
+. air
+a spruce_planks
+b oak_slab[type=bottom]
+c fusuma[facing=east]
+d fusuma[facing=north]
+e fusuma[facing=south]
+f fusuma[facing=west]
+g oak_fence
+h oak_planks
+i stripped_birch_log[axis=y]
+j lantern[hanging=true]
+k spruce_slab[type=top]
+l spruce_stairs[facing=south,half=bottom]
+m spruce_stairs[facing=east,half=bottom]
+n spruce_stairs[facing=north,half=bottom]
+o spruce_stairs[facing=west,half=bottom]
+layer 0
+aaaaaaaaaaaaa
+abbbhbbbhbbba
+abbbbbbbbbbba
+abbbbbbbbbbba
+ahbbbbbbbbbha
+abbbblbbbbbba
+abbbbbibbbbba
+abbbbbbbbbbba
+ahbbbbbbbbbha
+abbbbbbbbbbba
+abbbbbbbbbbba
+abbbhbbbhbbba
+aaaaaaaaaaaaa
+layer 1
+adddadddaddda
+f...g...g...c
+f...........c
+f...........c
+ag.........ga
+f...........c
+f....li.....c
+f....k......c
+ag.........ga
+c...........c
+c...........c
+c...g...g...c
+aeeeaeeeaeeea
+layer 2
+adddadddaddda
+f...g...g...c
+f...........c
+f...........c
+ag.........ga
+f...........c
+f.....i.....c
+f.....mk....c
+ag.........ga
+f...........c
+f...........c
+f...g...g...c
+aeeeaeeeaeeea
+layer 3
+adddadddaddda
+f...g...g...c
+f...........c
+f...........c
+ag..j...j..ga
+f......k....c
+f.....in....c
+f...........c
+ag..j...j..ga
+f...........c
+f...........c
+f...g...g...c
+aeeeaeeeaeeea
+layer 4
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaako.aaaaa
+aaaaa.i.aaaaa
+aaaaa...aaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+aaaaaaaaaaaaa
+door north
+5 1 0 .
+6 1 0 .
+7 1 0 .
+5 2 0 .
+6 2 0 .
+7 2 0 .
+door east
+12 1 5 .
+12 1 6 .
+12 1 7 .
+12 2 5 .
+12 2 6 .
+12 2 7 .
+door south
+5 1 12 .
+6 1 12 .
+7 1 12 .
+5 2 12 .
+6 2 12 .
+7 2 12 .
+door west
+0 1 5 .
+0 1 6 .
+0 1 7 .
+0 2 5 .
+0 2 6 .
+0 2 7 .

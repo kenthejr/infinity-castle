@@ -51,13 +51,13 @@ public class CastleClientGameTest implements FabricClientGameTest {
 			// Survival, because in creative a held jump key can toggle flight.
 			singleplayer.getServer().runCommand("gamemode survival @a");
 
-			// Stand on the nearest stairwell landing, then jump through the gravity gate.
+			// Stand on the nearest stairwell landing facing north, back down the staircase, then jump through the gravity gate.
 			int floor = CastleGeometry.ENTRANCE_FLOOR;
 			CastleLayout layout = singleplayer.getServer().computeOnServer(server ->
 				CastleChunkGenerator.layout(server.getLevel(CastleDimension.LEVEL).getChunkSource().randomState()));
 			CastleLayout.Cell cell = layout.nearestStairwell(floor, 0, 0, 32).orElseThrow(() -> new AssertionError("no stairwell near spawn"));
 			Vec3 landing = CastleTeleporter.lowerLanding(floor, cell);
-			singleplayer.getServer().runCommand(IN_CASTLE + String.format(Locale.ROOT, "tp @a %.2f %.2f %.2f 90 -10", landing.x, landing.y, landing.z));
+			singleplayer.getServer().runCommand(IN_CASTLE + String.format(Locale.ROOT, "tp @a %.2f %.2f %.2f 180 -10", landing.x, landing.y, landing.z));
 			singleplayer.getConnection().waitForChunksRender();
 			context.waitTicks(30);
 			assertInverted(context, false, "standing on the lower landing");

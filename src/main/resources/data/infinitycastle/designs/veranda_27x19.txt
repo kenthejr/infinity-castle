@@ -1,0 +1,174 @@
+# Infinity Castle design "veranda_27x19": fusuma walls inside a lantern-lit veranda with eaves, long.
+# Imported by tools/DesignImport.java from the structure-block regions at (-10, -60, 35) (doors closed)
+# and (-10, -30, 35) (doors open) of the "Infinity castle : Designs" world. Edit the world and re-import rather than editing this file.
+# Layers are listed bottom up. Within a layer each row runs west to east and the rows run north to south.
+size 27 5 19
+palette
+. air
+a spruce_planks
+b oak_slab[type=bottom]
+c oak_fence
+d fusuma[facing=north]
+e fusuma[facing=south]
+f fusuma[facing=east]
+g spruce_stairs[facing=south,half=bottom]
+h spruce_stairs[facing=north,half=bottom]
+i spruce_stairs[facing=north,half=top]
+j spruce_stairs[facing=south,half=top]
+k fusuma[facing=west]
+l lantern[hanging=true]
+m spruce_stairs[facing=east,half=bottom]
+n spruce_stairs[facing=east,half=top]
+o spruce_stairs[facing=west,half=bottom]
+p spruce_stairs[facing=west,half=top]
+q oak_planks
+r stripped_birch_log[axis=y]
+s spruce_slab[type=top]
+layer 0
+jjjjjjjjjjjjjjjjjjjjjjjjjjp
+naaaaaaaaaaaaaaaaaaaaaaaaap
+naaaaaaaaaaaaaaaaaaaaaaaaap
+naaaaaaaaaaaaaaaaaaaaaaaaap
+naaabbbqbbbqbbbqbbbqbbbaaap
+naaabbbbbbbbbbbbbbbbbbbaaap
+naaabbbbbbbbbbbbbbbbbbbaaap
+naaaqbbbbbbbbbbbbbbbbbqaaap
+naaabbbbbbbbgaabbbbbbbbaaap
+naaabbbbbbbbarabbbbbbbbaaap
+naaabbbbbbbbaaabbbbbbbbaaap
+naaaqbbbbbbbbbbbbbbbbbqaaap
+naaabbbbbbbbbbbbbbbbbbbaaap
+naaabbbbbbbbbbbbbbbbbbbaaap
+naaabbbqbbbqbbbqbbbqbbbaaap
+naaaaaaaaaaaaaaaaaaaaaaaaap
+naaaaaaaaaaaaaaaaaaaaaaaaap
+naaaaaaaaaaaaaaaaaaaaaaaaap
+niiiiiiiiiiiiiiiiiiiiiiiiii
+layer 1
+...........................
+.c.c...c...c...c...c...c.c.
+...........................
+.c.adddadddadddadddaddda.c.
+...k...c...c...c...c...f...
+...k...................f...
+...k...................f...
+.c.ac.................ca.c.
+...k...................f...
+...k........gr.........f...
+...k........s..........f...
+.c.ac.................ca.c.
+...f...................f...
+...f...................f...
+...f...c...c...c...c...f...
+.c.aeeeaeeeaeeeaeeeaeeea.c.
+...........................
+.c.c...c...c...c...c...c.c.
+...........................
+layer 2
+...........................
+.c.c...c...c...c...c...c.c.
+...........................
+.c.adddadddadddadddaddda.c.
+...k...c...c...c...c...f...
+...k...................f...
+...k...................f...
+.c.ac.................ca.c.
+...k...................f...
+...k.........r.........f...
+...k.........ms........f...
+.c.ac.................ca.c.
+...k...................f...
+...k...................f...
+...k...c...c...c...c...f...
+.c.aeeeaeeeaeeeaeeeaeeea.c.
+...........................
+.c.c...c...c...c...c...c.c.
+...........................
+layer 3
+...........................
+.c.c.l.c.l.c.l.c.l.c.l.c.c.
+...........................
+.c.adddadddadddadddaddda.c.
+...k...c...c...c...c...f...
+.l.k...................f.l.
+...k...................f...
+.c.ac......l...l......ca.c.
+...k..........s........f...
+.l.k.........rh........f.l.
+...k...................f...
+.c.ac......l...l......ca.c.
+...k...................f...
+.l.k...................f.l.
+...k...c...c...c...c...f...
+.c.aeeeaeeeaeeeaeeeaeeea.c.
+...........................
+.c.c.l.c.l.c.l.c.l.c.l.c.c.
+...........................
+layer 4
+mgggggggggggggggggggggggggg
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaso.aaaaaaaaaaao
+maaaaaaaaaaa.r.aaaaaaaaaaao
+maaaaaaaaaaa...aaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+maaaaaaaaaaaaaaaaaaaaaaaaao
+mhhhhhhhhhhhhhhhhhhhhhhhhhh
+door north
+11 0 0 a
+12 0 0 a
+13 0 0 a
+14 0 0 a
+15 0 0 a
+12 1 3 .
+13 1 3 .
+14 1 3 .
+12 2 3 .
+13 2 3 .
+14 2 3 .
+door east
+26 0 7 a
+26 0 8 a
+26 0 9 a
+26 0 10 a
+26 0 11 a
+23 1 8 .
+23 1 9 .
+23 1 10 .
+23 2 8 .
+23 2 9 .
+23 2 10 .
+door south
+11 0 18 a
+12 0 18 a
+13 0 18 a
+14 0 18 a
+15 0 18 a
+12 1 15 .
+13 1 15 .
+14 1 15 .
+12 2 15 .
+13 2 15 .
+14 2 15 .
+door west
+0 0 7 a
+0 0 8 a
+0 0 9 a
+0 0 10 a
+0 0 11 a
+3 1 8 .
+3 1 9 .
+3 1 10 .
+3 2 8 .
+3 2 9 .
+3 2 10 .

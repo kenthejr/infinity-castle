@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * Decides what occupies every cell of the castle.
  *
- * <p>The layout is a grid of chunk-sized cells per floor half. Each cell is either void or occupied; occupied cells
+ * <p>The layout is a grid of {@link CastleGeometry#CELL_SIZE}-block cells per floor half. Each cell is either void or occupied; occupied cells
  * connect to occupied neighbours through edges chosen by a hash of the edge itself, so both cells sharing an edge
  * always agree. The module type then follows from the cell's connections: dead ends become rooms, straight runs become
  * corridors or bridges, junctions become halls.

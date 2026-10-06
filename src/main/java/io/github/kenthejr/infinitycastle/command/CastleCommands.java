@@ -21,7 +21,6 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.core.SectionPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -85,7 +84,7 @@ public final class CastleCommands {
 		int floor = CastleGeometry.floorOf(y);
 		Half half = CastleGeometry.halfOf(y);
 		CellPlan plan = CastleChunkGenerator.layout(level.getChunkSource().randomState())
-			.plan(floor, half, SectionPos.blockToSectionCoord(player.getBlockX()), SectionPos.blockToSectionCoord(player.getBlockZ()));
+			.plan(floor, half, CastleGeometry.cellOf(player.getBlockX()), CastleGeometry.cellOf(player.getBlockZ()));
 		FloorProfile profile = FloorProfile.of(floor);
 		ctx.getSource().sendSuccess(() -> Component.translatable(
 			"commands.infinitycastle.where",
@@ -107,7 +106,7 @@ public final class CastleCommands {
 		}
 		int floor = CastleGeometry.floorOf(GravityController.centerY(player));
 		CastleLayout layout = CastleChunkGenerator.layout(level.getChunkSource().randomState());
-		Optional<CastleLayout.Cell> cell = layout.nearestStairwell(floor, SectionPos.blockToSectionCoord(player.getBlockX()), SectionPos.blockToSectionCoord(player.getBlockZ()), 32);
+		Optional<CastleLayout.Cell> cell = layout.nearestStairwell(floor, CastleGeometry.cellOf(player.getBlockX()), CastleGeometry.cellOf(player.getBlockZ()), 32);
 		if (cell.isEmpty()) {
 			ctx.getSource().sendFailure(Component.translatable("commands.infinitycastle.stairwell.none"));
 			return 0;

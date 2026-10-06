@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": "minecraft:stick",
+    "P": "minecraft:paper",
+    "D": "minecraft:dark_oak_planks"
+  },
+  "pattern": [
+    "SPS",
+    "PDP",
+    "SPS"
+  ],
+  "result": {
+    "count": 4,
+    "id": "infinitycastle:fusuma"
+  }
+}

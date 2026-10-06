@@ -1,16 +1,18 @@
 package io.github.kenthejr.infinitycastle.world;
 
-import io.github.kenthejr.infinitycastle.block.TatamiBlock;
+import io.github.kenthejr.infinitycastle.block.FusumaBlock;
 import io.github.kenthejr.infinitycastle.gen.Material;
 import io.github.kenthejr.infinitycastle.gen.Piece;
 import io.github.kenthejr.infinitycastle.registry.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -23,21 +25,20 @@ public final class CastlePalette {
 	public static Block block(Material material) {
 		return switch (material) {
 			case AIR -> Blocks.AIR;
-			case DECK -> Blocks.SPRUCE_PLANKS;
-			case FLOOR_TRIM -> Blocks.DARK_OAK_PLANKS;
-			case CEILING -> Blocks.DARK_OAK_PLANKS;
-			case TATAMI -> ModBlocks.TATAMI;
-			case TIMBER -> Blocks.STRIPPED_DARK_OAK_LOG;
-			case LACQUER -> ModBlocks.LACQUERED_PLANKS;
-			case SHOJI_WALL -> ModBlocks.SHOJI;
-			case SHOJI_SCREEN -> ModBlocks.SHOJI_SCREEN;
-			case RAIL -> Blocks.MANGROVE_FENCE;
-			case ROOF_TILE -> Blocks.DEEPSLATE_TILES;
-			case ROOF_STAIRS -> Blocks.DEEPSLATE_TILE_STAIRS;
-			case ROOF_SLAB -> Blocks.DEEPSLATE_TILE_SLAB;
-			case WOOD_STAIRS -> Blocks.DARK_OAK_STAIRS;
-			case WOOD_SLAB -> Blocks.DARK_OAK_SLAB;
-			case PAPER_LANTERN -> ModBlocks.PAPER_LANTERN;
+			case SPRUCE_PLANKS -> Blocks.SPRUCE_PLANKS;
+			case DARK_OAK_PLANKS -> Blocks.DARK_OAK_PLANKS;
+			case OAK_PLANKS -> Blocks.OAK_PLANKS;
+			case OAK_SLAB -> Blocks.OAK_SLAB;
+			case SPRUCE_SLAB -> Blocks.SPRUCE_SLAB;
+			case SPRUCE_STAIRS -> Blocks.SPRUCE_STAIRS;
+			case DARK_OAK_STAIRS -> Blocks.DARK_OAK_STAIRS;
+			case DARK_OAK_TRAPDOOR -> Blocks.DARK_OAK_TRAPDOOR;
+			case OAK_FENCE -> Blocks.OAK_FENCE;
+			case SPRUCE_FENCE -> Blocks.SPRUCE_FENCE;
+			case SPRUCE_FENCE_GATE -> Blocks.SPRUCE_FENCE_GATE;
+			case STRIPPED_BIRCH_LOG -> Blocks.STRIPPED_BIRCH_LOG;
+			case LANTERN -> Blocks.LANTERN;
+			case FUSUMA -> ModBlocks.FUSUMA;
 		};
 	}
 
@@ -46,18 +47,28 @@ public final class CastlePalette {
 		return switch (piece.material().shape()) {
 			case STAIRS -> state
 				.setValue(StairBlock.FACING, direction(piece))
-				.setValue(StairBlock.HALF, piece.top() ? Half.TOP : Half.BOTTOM);
+				.setValue(StairBlock.HALF, half(piece));
 			case SLAB -> state.setValue(SlabBlock.TYPE, piece.top() ? SlabType.TOP : SlabType.BOTTOM);
+			case TRAPDOOR -> state
+				.setValue(TrapDoorBlock.FACING, direction(piece))
+				.setValue(TrapDoorBlock.HALF, half(piece))
+				.setValue(TrapDoorBlock.OPEN, true);
+			case GATE -> state.setValue(FenceGateBlock.FACING, direction(piece));
+			case PANEL -> state.setValue(FusumaBlock.FACING, direction(piece));
 			case LANTERN -> state.setValue(LanternBlock.HANGING, piece.top());
 			case AXIS -> state.setValue(RotatedPillarBlock.AXIS, axis(piece.axis()));
-			case HORIZONTAL_AXIS -> state.setValue(TatamiBlock.AXIS, axis(piece.axis()));
 			default -> state;
 		};
 	}
 
-	/** Fences and panes need their connections computed once neighbours exist. */
+	/** Fences need their connections, and stairs their corner shapes, computed once their neighbours exist. */
 	public static boolean needsPostProcessing(Piece piece) {
-		return piece.material().shape() == Material.Shape.CONNECTING;
+		Material.Shape shape = piece.material().shape();
+		return shape == Material.Shape.FENCE || shape == Material.Shape.STAIRS;
+	}
+
+	private static Half half(Piece piece) {
+		return piece.top() ? Half.TOP : Half.BOTTOM;
 	}
 
 	private static Direction direction(Piece piece) {

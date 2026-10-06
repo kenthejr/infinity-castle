@@ -1,6 +1,7 @@
 package io.github.kenthejr.infinitycastle.registry;
 
 import io.github.kenthejr.infinitycastle.InfinityCastle;
+import io.github.kenthejr.infinitycastle.block.FusumaBlock;
 import io.github.kenthejr.infinitycastle.block.PaperLanternBlock;
 import io.github.kenthejr.infinitycastle.block.TatamiBlock;
 import java.util.function.Function;
@@ -54,6 +55,17 @@ public final class ModBlocks {
 		"paper_lantern",
 		PaperLanternBlock::new,
 		BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN).mapColor(MapColor.COLOR_RED).sound(SoundType.WOOL).strength(0.5F)
+	);
+	public static final Block FUSUMA = register(
+		"fusuma",
+		FusumaBlock::new,
+		BlockBehaviour.Properties.of()
+			.mapColor(MapColor.SAND)
+			.strength(0.6F)
+			.sound(SoundType.BAMBOO_WOOD)
+			.noOcclusion()
+			.lightLevel(state -> 7)
+			.ignitedByLava()
 	);
 
 	private ModBlocks() {

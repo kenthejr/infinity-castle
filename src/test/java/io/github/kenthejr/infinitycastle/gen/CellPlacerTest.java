@@ -7,9 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class CellPlacerTest {
+	private static final int CELL = CastleGeometry.CELL_SIZE;
+
 	/** A sparse world: (x, y, z) packed into a long. */
 	private static final class World {
 		final Map<Long, Piece> blocks = new HashMap<>();
@@ -54,14 +57,14 @@ class CellPlacerTest {
 		World world = new World();
 		for (int cx = -3; cx <= 3; cx++) {
 			for (int cz = -3; cz <= 3; cz++) {
-				int ox = cx * 16;
-				int oz = cz * 16;
-				CellPlacer.placeColumn(layout, cx, cz, (x, y, z, piece) -> world.set(ox + x, y, oz + z, piece));
+				int ox = cx * CELL;
+				int oz = cz * CELL;
+				CellPlacer.placeCell(layout, cx, cz, (x, y, z, piece) -> world.set(ox + x, y, oz + z, piece));
 			}
 		}
 		int[] lanterns = {0};
 		world.blocks.forEach((key, piece) -> {
-			if (piece.material() != Material.PAPER_LANTERN) {
+			if (piece.material() != Material.LANTERN) {
 				return;
 			}
 			int y = (int) (key >>> 40) - 4096;
@@ -82,14 +85,37 @@ class CellPlacerTest {
 		for (int cx = -2; cx <= 2; cx++) {
 			for (int cz = -2; cz <= 2; cz++) {
 				World world = new World();
-				CellPlacer.placeColumn(layout, cx, cz, (x, y, z, piece) -> {
-					assertTrue(x >= 0 && x < 16 && z >= 0 && z < 16);
+				CellPlacer.placeCell(layout, cx, cz, (x, y, z, piece) -> {
+					assertTrue(x >= 0 && x < CELL && z >= 0 && z < CELL);
 					assertTrue(y >= CastleGeometry.MIN_Y && y < CastleGeometry.MAX_Y, "y out of range: " + y);
 					assertNull(world.blocks.get(World.key(x, y, z)), "two cells wrote to " + x + "," + y + "," + z);
 					world.set(x, y, z, piece);
 				});
 			}
 		}
+	}
+
+	/** The four chunks of a cell together hold exactly the cell, each in its own quarter. */
+	@Test
+	void chunksAreQuartersOfTheirCell() {
+		CastleLayout layout = new CastleLayout(13L);
+		int cx = -1;
+		int cz = 2;
+		World cell = new World();
+		CellPlacer.placeCell(layout, cx, cz, cell::set);
+		World chunks = new World();
+		for (int dx = 0; dx < CastleGeometry.CHUNKS_PER_CELL; dx++) {
+			for (int dz = 0; dz < CastleGeometry.CHUNKS_PER_CELL; dz++) {
+				int ox = dx * 16;
+				int oz = dz * 16;
+				CellPlacer.placeChunk(layout, cx * CastleGeometry.CHUNKS_PER_CELL + dx, cz * CastleGeometry.CHUNKS_PER_CELL + dz, (x, y, z, piece) -> {
+					assertTrue(x >= 0 && x < 16 && z >= 0 && z < 16, "chunk-local coordinate out of range: " + x + "," + z);
+					chunks.set(ox + x, y, oz + z, piece);
+				});
+			}
+		}
+		assertFalse(cell.blocks.isEmpty());
+		assertEquals(cell.blocks, chunks.blocks);
 	}
 
 	@Test
@@ -99,12 +125,28 @@ class CellPlacerTest {
 		CellPlacer.place(plan, Modules.build(plan), 5, Half.LOWER, world::set);
 		assertFalse(world.blocks.isEmpty());
 		int base = CastleGeometry.floorBase(5);
+		Set<Material.Shape> sideways = Set.of(Material.Shape.CUBE, Material.Shape.AXIS, Material.Shape.PANEL);
 		world.blocks.forEach((key, piece) -> {
-			Material.Shape shape = piece.material().shape();
-			assertFalse(shape == Material.Shape.STAIRS || shape == Material.Shape.SLAB || shape == Material.Shape.LANTERN || shape == Material.Shape.CONNECTING, piece.toString());
+			assertTrue(sideways.contains(piece.material().shape()), piece.toString());
 			int y = (int) (key >>> 40) - 4096;
-			assertTrue(y >= base && y < base + CastleGeometry.HALF_HEIGHT);
+			assertTrue(y >= base + CastleGeometry.DECK_Y && y < base + CastleGeometry.HALF_HEIGHT, "sideways chamber outside its half at y=" + y);
 		});
+	}
+
+	/** A sideways chamber keeps its whole floor: nothing of the design is clipped away by the tipping. */
+	@Test
+	void sidewaysChambersFitInsideTheHalf() {
+		for (long variant = 0; variant < 4; variant++) {
+			CellPlan plan = new CellPlan(ModuleType.SIDEWAYS_CHAMBER, Openings.NONE, variant);
+			Canvas canvas = Modules.build(plan);
+			int[] drawn = {0};
+			canvas.forEach((x, y, z, piece) -> drawn[0]++);
+			int[] placed = {0};
+			CellPlacer.place(plan, canvas, 5, Half.LOWER, (x, y, z, piece) -> placed[0]++);
+			int[] dropped = {0};
+			canvas.forEach((x, y, z, piece) -> dropped[0] += piece.tipOverX().isAir() ? 1 : 0);
+			assertEquals(drawn[0] - dropped[0], placed[0], "variant " + variant + " was clipped");
+		}
 	}
 
 	/**
@@ -121,10 +163,12 @@ class CellPlacerTest {
 		int equator = (int) CastleGeometry.equatorY(floor);
 		int lowerLandingTop = equator - 2;
 		int upperLandingBottom = equator + 2;
-		assertEquals(Material.DECK, world.get(8, lowerLandingTop - 1, 12).material());
-		assertEquals(Material.DECK, world.get(8, upperLandingBottom, 12).material());
+		int x = Modules.LANDING_CENTER_X;
+		int z = Modules.LANDING_CENTER_Z;
+		assertEquals(Material.SPRUCE_PLANKS, world.get(x, lowerLandingTop - 1, z).material());
+		assertEquals(Material.SPRUCE_PLANKS, world.get(x, upperLandingBottom, z).material());
 		for (int y = lowerLandingTop; y < upperLandingBottom; y++) {
-			assertTrue(world.get(8, y, 12).isAir());
+			assertTrue(world.get(x, y, z).isAir());
 		}
 	}
 }

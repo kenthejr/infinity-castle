@@ -1,8 +1,8 @@
 package io.github.kenthejr.infinitycastle.gen;
 
 /**
- * A 16 × 24 × 16 voxel grid holding one cell's worth of structure in upright local coordinates: y = 0 is the deck and
- * y grows away from it. Unset voxels are air.
+ * A 32 × 24 × 32 voxel grid holding one cell's worth of structure in upright local coordinates: y = 0 is the bottom of
+ * the half and y grows away from it. Unset voxels are air.
  */
 public final class Canvas {
 	public static final int SIZE_X = CastleGeometry.CELL_SIZE;
@@ -34,6 +34,33 @@ public final class Canvas {
 		this.pieces[index(x, y, z)] = piece.isAir() ? null : piece;
 	}
 
+	public void set(int x, int y, int z, Material material) {
+		this.set(x, y, z, Piece.of(material));
+	}
+
+	/** Sets a voxel only if it is inside the canvas and nothing has been drawn there yet. */
+	public boolean setIfAir(int x, int y, int z, Piece piece) {
+		if (!inBounds(x, y, z) || !this.get(x, y, z).isAir()) {
+			return false;
+		}
+		this.set(x, y, z, piece);
+		return true;
+	}
+
+	public void fill(int x0, int y0, int z0, int x1, int y1, int z1, Piece piece) {
+		for (int y = Math.min(y0, y1); y <= Math.max(y0, y1); y++) {
+			for (int z = Math.min(z0, z1); z <= Math.max(z0, z1); z++) {
+				for (int x = Math.min(x0, x1); x <= Math.max(x0, x1); x++) {
+					this.set(x, y, z, piece);
+				}
+			}
+		}
+	}
+
+	public void fill(int x0, int y0, int z0, int x1, int y1, int z1, Material material) {
+		this.fill(x0, y0, z0, x1, y1, z1, Piece.of(material));
+	}
+
 	/** Visits every non-air voxel. */
 	public void forEach(VoxelVisitor visitor) {
 		for (int y = 0; y < SIZE_Y; y++) {
@@ -57,68 +84,8 @@ public final class Canvas {
 		return true;
 	}
 
-	/** A drawing surface onto this canvas that is turned clockwise by {@code quarterTurns} around the cell centre. */
-	public Frame frame(int quarterTurns) {
-		return new Frame(this, Math.floorMod(quarterTurns, 4));
-	}
-
-	public Frame frame() {
-		return this.frame(0);
-	}
-
 	@FunctionalInterface
 	public interface VoxelVisitor {
 		void visit(int x, int y, int z, Piece piece);
-	}
-
-	/**
-	 * Rotated view used by module builders. Builders are written once in a canonical orientation (for example with the
-	 * door facing north) and drawn through a frame to produce the other three orientations.
-	 */
-	public static final class Frame {
-		private final Canvas canvas;
-		private final int turns;
-
-		private Frame(Canvas canvas, int turns) {
-			this.canvas = canvas;
-			this.turns = turns;
-		}
-
-		public Canvas canvas() {
-			return this.canvas;
-		}
-
-		public int turns() {
-			return this.turns;
-		}
-
-		public void set(int x, int y, int z, Piece piece) {
-			int rx = x;
-			int rz = z;
-			for (int i = 0; i < this.turns; i++) {
-				int t = rx;
-				rx = SIZE_Z - 1 - rz;
-				rz = t;
-			}
-			this.canvas.set(rx, y, rz, piece.rotateY(this.turns));
-		}
-
-		public void set(int x, int y, int z, Material material) {
-			this.set(x, y, z, Piece.of(material));
-		}
-
-		public void fill(int x0, int y0, int z0, int x1, int y1, int z1, Piece piece) {
-			for (int y = Math.min(y0, y1); y <= Math.max(y0, y1); y++) {
-				for (int z = Math.min(z0, z1); z <= Math.max(z0, z1); z++) {
-					for (int x = Math.min(x0, x1); x <= Math.max(x0, x1); x++) {
-						this.set(x, y, z, piece);
-					}
-				}
-			}
-		}
-
-		public void fill(int x0, int y0, int z0, int x1, int y1, int z1, Material material) {
-			this.fill(x0, y0, z0, x1, y1, z1, Piece.of(material));
-		}
 	}
 }

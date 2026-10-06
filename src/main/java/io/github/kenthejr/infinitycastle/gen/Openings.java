@@ -5,9 +5,12 @@ public record Openings(boolean north, boolean east, boolean south, boolean west)
 	public static final Openings NONE = new Openings(false, false, false, false);
 	public static final Openings ALL = new Openings(true, true, true, true);
 
-	/** Doorways always span these coordinates along an edge, so every module lines up with its neighbours. */
-	public static final int DOOR_MIN = 6;
-	public static final int DOOR_MAX = 9;
+	/**
+	 * Doorways are three blocks wide and centred on the cell's edge, so every module lines up with its neighbours. The
+	 * bridges that lead to them are two blocks wider, for their rails.
+	 */
+	public static final int DOOR_MIN = CastleGeometry.CELL_SIZE / 2 - 1;
+	public static final int DOOR_MAX = CastleGeometry.CELL_SIZE / 2 + 1;
 
 	public boolean has(Dir dir) {
 		return switch (dir) {

@@ -21,6 +21,7 @@ public final class TextureGen {
 		write("textures/block/shoji_screen_top.png", solidWood());
 		write("textures/block/lacquered_planks.png", lacqueredPlanks());
 		write("textures/block/paper_lantern.png", paperLantern());
+		write("textures/block/fusuma.png", fusuma());
 		write("textures/item/biwa.png", biwa());
 		write("icon.png", icon(128));
 		System.out.println("Textures written to " + ROOT.getAbsolutePath());
@@ -191,6 +192,43 @@ public final class TextureGen {
 				img.setRGB(x, y, shade(paper, 0.9 + random.nextDouble() * 0.08));
 			}
 		}
+		return img;
+	}
+
+	/**
+	 * A fusuma panel: cream paper in a dark frame, a back-lit lattice window across the upper half and a round pull
+	 * (hikite) lower right.
+	 */
+	private static BufferedImage fusuma() {
+		BufferedImage img = image(16);
+		Random random = new Random(6);
+		int wood = 0x3A2616;
+		int paper = 0xEADBBE;
+		int glow = 0xFFE9BE;
+		for (int y = 0; y < 16; y++) {
+			for (int x = 0; x < 16; x++) {
+				boolean frame = x == 0 || y == 0 || x == 15 || y == 15;
+				boolean inWindow = x >= 3 && x <= 12 && y >= 2 && y <= 8;
+				boolean lattice = inWindow && ((x - 3) % 3 == 0 || (y - 2) % 3 == 0);
+				int color;
+				if (frame) {
+					color = shade(wood, 0.85 + random.nextDouble() * 0.1);
+				} else if (lattice) {
+					color = shade(wood, 1.15);
+				} else if (inWindow) {
+					double light = 1.0 - 0.05 * Math.abs(x - 7.5) / 4.5;
+					color = shade(glow, light * (0.97 + random.nextDouble() * 0.05));
+				} else {
+					color = shade(paper, 0.96 + random.nextDouble() * 0.06);
+				}
+				img.setRGB(x, y, color);
+			}
+		}
+		// Hikite: a sunken oval pull.
+		img.setRGB(11, 11, shade(wood, 0.7));
+		img.setRGB(12, 11, shade(wood, 0.7));
+		img.setRGB(11, 12, shade(wood, 0.9));
+		img.setRGB(12, 12, shade(wood, 1.1));
 		return img;
 	}
 

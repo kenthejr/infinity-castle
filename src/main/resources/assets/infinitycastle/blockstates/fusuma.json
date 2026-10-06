@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "infinitycastle:block/fusuma"
+    },
+    "facing=east": {
+      "model": "infinitycastle:block/fusuma",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "infinitycastle:block/fusuma",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "infinitycastle:block/fusuma",
+      "y": 270
+    }
+  }
+}

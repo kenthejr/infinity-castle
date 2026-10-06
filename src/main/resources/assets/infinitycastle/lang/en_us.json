@@ -4,6 +4,7 @@
   "block.infinitycastle.shoji_screen": "Shoji Screen",
   "block.infinitycastle.lacquered_planks": "Lacquered Planks",
   "block.infinitycastle.paper_lantern": "Paper Lantern",
+  "block.infinitycastle.fusuma": "Fusuma",
   "item.infinitycastle.biwa": "Biwa",
   "itemGroup.infinitycastle.infinity_castle": "Infinity Castle",
 
@@ -23,7 +24,7 @@
   "module.infinitycastle.void": "void",
   "module.infinitycastle.sideways_chamber": "sideways chamber",
   "module.infinitycastle.pavilion": "pavilion",
-  "module.infinitycastle.room": "screen room",
+  "module.infinitycastle.room": "fusuma room",
   "module.infinitycastle.corridor": "corridor",
   "module.infinitycastle.bridge": "bridge",
   "module.infinitycastle.hall": "hall",
